@@ -14,6 +14,7 @@
 				name="username"
 				placeholder="Your GitHub username"
 				required
+				autocomplete="off"
 			/>
 		</div>
 		<button type="submit">See the results →</button>
