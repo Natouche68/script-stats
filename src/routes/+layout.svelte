@@ -14,7 +14,7 @@
 		--dark-color: #1e1e1f;
 		--bg-color: #2e2e30;
 		--text-color: #d3e9f5;
-		--dim-color: #a5c9dd;
+		--dim-color: #65808f;
 		--accent-color: #63b0cd;
 	}
 

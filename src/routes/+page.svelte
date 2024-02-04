@@ -1,4 +1,9 @@
+<script lang="ts">
+	import HackerBackground from "$lib/HackerBackground.svelte";
+</script>
+
 <div class="page">
+	<HackerBackground />
 	<form method="post">
 		<h1>Script Stats</h1>
 		<h2>See your prefered programming languages,<br /> all in one place</h2>
@@ -28,6 +33,8 @@
 		padding: 2rem;
 		border-radius: 2rem;
 		width: 50%;
+		z-index: 2;
+		box-shadow: 0 0 1rem var(--dark-color);
 	}
 
 	h1 {
