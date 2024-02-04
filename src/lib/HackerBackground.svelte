@@ -18,7 +18,7 @@
 	function generateLetters() {
 		letters = "";
 
-		for (let i = 0; i < 8000; i++) {
+		for (let i = 0; i < 6000; i++) {
 			letters += chars[Math.floor(Math.random() * chars.length)];
 		}
 	}
