@@ -4,4 +4,10 @@
 	export let data: PageData;
 </script>
 
-Username : {data.username}
+{#await data.repos then repos}
+	<ol>
+		{#each repos as repo}
+			<li>{repo}</li>
+		{/each}
+	</ol>
+{/await}
