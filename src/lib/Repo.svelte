@@ -23,7 +23,7 @@
 				$languagesStore.push(language);
 			}
 		});
-		$languagesStore = $languagesStore;
+		$languagesStore = $languagesStore.sort((a, b) => b.percent - a.percent);
 	});
 </script>
 
