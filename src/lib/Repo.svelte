@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import type { Language } from "$lib/types";
 
 	export let name: string;
 	export let username: string;
 
-	let languages: string[] = [];
+	let languages: Language[] = [];
 
 	onMount(async () => {
 		const response = await fetch(`/api/languages/${username}/${name}`);
@@ -16,7 +17,12 @@
 	<div class="name">{name}</div>
 	<div class="languages-list">
 		{#each languages as language}
-			<div class="language">{language}</div>
+			<div class="language" style="--color: {language.color}">
+				{language.name}
+				<div class="percent">
+					{language.percent}%
+				</div>
+			</div>
 		{/each}
 	</div>
 </div>
@@ -39,6 +45,17 @@
 		flex-direction: row;
 		justify-content: left;
 		align-items: center;
+		gap: 0.8rem;
+	}
+
+	.language {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 		gap: 0.5rem;
+	}
+
+	.percent {
+		font-size: 0.8rem;
 	}
 </style>
