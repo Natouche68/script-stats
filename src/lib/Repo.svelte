@@ -55,7 +55,17 @@
 		gap: 0.5rem;
 	}
 
+	.language::before {
+		content: " ";
+		display: block;
+		width: 0.8rem;
+		height: 0.8rem;
+		background-color: var(--color);
+		border-radius: 50%;
+	}
+
 	.percent {
 		font-size: 0.8rem;
+		color: var(--dim-color);
 	}
 </style>
