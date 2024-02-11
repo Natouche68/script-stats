@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { languagesStore, numberOfRepos } from "$lib/languagesStore";
 	import { onMount } from "svelte";
 	import type { Language } from "$lib/types";
 
@@ -10,6 +11,19 @@
 	onMount(async () => {
 		const response = await fetch(`/api/languages/${username}/${name}`);
 		languages = await response.json();
+
+		numberOfRepos.set($numberOfRepos + 1);
+		languages.forEach((language) => {
+			const languageIndex = $languagesStore.findIndex(
+				(l) => l.name === language.name
+			);
+			if (languageIndex !== -1) {
+				$languagesStore[languageIndex].percent += language.percent;
+			} else {
+				$languagesStore.push(language);
+			}
+		});
+		$languagesStore = $languagesStore;
 	});
 </script>
 
@@ -37,6 +51,7 @@
 
 	.name {
 		font-size: 1.4rem;
+		font-weight: 500;
 	}
 
 	.languages-list {

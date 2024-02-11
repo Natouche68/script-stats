@@ -2,6 +2,7 @@
 	import type { PageData } from "./$types";
 	import Repo from "$lib/Repo.svelte";
 	import HackerBackground from "$lib/HackerBackground.svelte";
+	import { languagesStore, numberOfRepos } from "$lib/languagesStore";
 
 	export let data: PageData;
 </script>
@@ -10,6 +11,10 @@
 	<HackerBackground />
 	<div class="app-card">
 		<div class="username">@{data.username}</div>
+		{#each $languagesStore as language}
+			{language.name}: {Math.round(language.percent / $numberOfRepos)}%
+			<br />
+		{/each}
 		{#await data.repos then repos}
 			{#each repos as repo}
 				<Repo name={repo} username={data.username} />
