@@ -12,18 +12,20 @@
 		const response = await fetch(`/api/languages/${username}/${name}`);
 		languages = await response.json();
 
-		numberOfRepos.set($numberOfRepos + 1);
-		languages.forEach((language) => {
-			const languageIndex = $languagesStore.findIndex(
-				(l) => l.name === language.name
-			);
-			if (languageIndex !== -1) {
-				$languagesStore[languageIndex].percent += language.percent;
-			} else {
-				$languagesStore.push(language);
-			}
-		});
-		$languagesStore = $languagesStore.sort((a, b) => b.percent - a.percent);
+		if (languages.length > 0) {
+			numberOfRepos.set($numberOfRepos + 1);
+			languages.forEach((language) => {
+				const languageIndex = $languagesStore.findIndex(
+					(l) => l.name === language.name
+				);
+				if (languageIndex !== -1) {
+					$languagesStore[languageIndex].percent += language.percent;
+				} else {
+					$languagesStore.push(language);
+				}
+			});
+			$languagesStore = $languagesStore.sort((a, b) => b.percent - a.percent);
+		}
 	});
 </script>
 

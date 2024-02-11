@@ -68,6 +68,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		text-align: center;
 		height: 1.8rem;
 		font-size: 0.8rem;
 		color: var(--bg-color);
