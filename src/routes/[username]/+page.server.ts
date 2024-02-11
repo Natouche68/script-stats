@@ -2,16 +2,13 @@ import type { PageServerLoad } from "./$types";
 import * as cheerio from "cheerio";
 
 export const load: PageServerLoad = async ({ params }) => {
+	const repos = getReposByPage(1, params.username);
+
 	return {
-		repos: getRepos(params.username),
+		username: params.username,
+		repos: repos,
 	};
 };
-
-async function getRepos(username: string): Promise<string[]> {
-	const repos = await getReposByPage(1, username);
-
-	return repos;
-}
 
 async function getReposByPage(
 	page: number,
@@ -24,17 +21,18 @@ async function getReposByPage(
 
 	const $ = cheerio.load(html);
 
-	const repos = $("#user-repositories-list").find("li").toArray();
+	const reposList = $("#user-repositories-list").find("li").toArray();
 
-	const reposNames: string[] = [];
-	repos.forEach((repo) => {
-		const repoName = $(repo).find("h3").find("a").text();
-		reposNames.push(repoName);
+	const repos: string[] = [];
+	reposList.forEach(async (repo) => {
+		const repoName = $(repo).find("h3").find("a").text().trim();
+
+		repos.push(repoName);
 	});
 
 	if ($("#user-repositories-list").find("a.next_page").length > 0) {
-		return [...reposNames, ...(await getReposByPage(page + 1, username))];
+		return [...repos, ...(await getReposByPage(page + 1, username))];
 	} else {
-		return reposNames;
+		return repos;
 	}
 }
